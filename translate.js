@@ -20,13 +20,13 @@ const detectLanguage = async (text) => {
   }
 };
 
-detectLanguage("need")
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// detectLanguage("need")
+//   .then((res) => {
+//     console.log(res);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 const translateText = async (text, targetLanguage) => {
   try {

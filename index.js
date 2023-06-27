@@ -10,6 +10,10 @@ app.use(express.static(path.join(__dirname + "/public")));
 app.use(express.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server running successfully" });
+});
+
 app.post("/", async (req, res) => {
   try {
     const { text } = req.body;
@@ -18,9 +22,12 @@ app.post("/", async (req, res) => {
     }
 
     const translatedText = await translateText(text, "hi");
-    const url = await convertTextToMp3(translatedText);
+    const success = await convertTextToMp3(translatedText);
+    if (!success) {
+      throw new Error("Audio file could not be generated");
+    }
     res.status(201).json({
-      url,
+      success,
     });
   } catch (err) {
     res.status(400).json({ error: err.message });

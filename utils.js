@@ -15,12 +15,15 @@ async function convertTextToMp3(text) {
 
     const [response] = await client.synthesizeSpeech(request);
 
-    const writeFile = util.promisify(fs.writeFile);
+    const fileName = Date.now().toString();
 
-    await writeFile("public/output.mp3", response.audioContent, "binary");
+    const writeFile = util.promisify(fs.writeFile);
+    // await writeFile(`public/${fileName}.mp3`, response.audioContent, "binary");
+
+    fs.writeFileSync(`public/${fileName}.mp3`, response.audioContent);
 
     console.log("Text to speech is Successfully completed");
-    return true;
+    return fileName;
   } catch (error) {
     console.log(error);
     return false;

@@ -22,12 +22,12 @@ app.post("/", async (req, res) => {
     }
 
     const translatedText = await translateText(text, "hi");
-    const success = await convertTextToMp3(translatedText);
-    if (!success) {
+    const fileName = await convertTextToMp3(translatedText);
+    if (!fileName) {
       throw new Error("Audio file could not be generated");
     }
     res.status(201).json({
-      success,
+      fileName,
     });
   } catch (err) {
     res.status(400).json({ error: err.message });

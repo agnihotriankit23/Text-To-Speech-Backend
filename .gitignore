@@ -5,3 +5,5 @@ serviceaccount.json
 text-to-speech-translate.json
 
 node_modules
+
+*.mp3
